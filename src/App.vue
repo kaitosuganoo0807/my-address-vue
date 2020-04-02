@@ -1,32 +1,38 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-side-icon @click="toggleSideMenu"></v-toolbar-side-icon>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>マイアドレス帳</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-toolbar>
+    <SideNuv />
+    <v-content>
+      <router-view />
+    </v-content>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+import { mapActions } from 'vuex'
+import SideNuv from './components/SideNuv'
+export default {
+  name: 'App',
+  components: {
+    SideNuv
+  },
+  data () {
+    return {
+      //
     }
+  },
+  methods: {
+    openSideMenu () {
+      this.$store.dispatch('toggleSideMenu')
+    },
+    ...mapActions(['toggleSideMenu'])
   }
 }
-</style>
+</script>
